@@ -14,5 +14,8 @@ https://jojoldu.tistory.com/334
 
 https://docs.gradle.org/current/userguide/what_is_gradle.html
 
+혹시 gradle 탭이 안나온다면
 
+* build.gradle에 import gradle
+* 플러그인 설치 and...
 
