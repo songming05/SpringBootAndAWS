@@ -19,3 +19,13 @@ https://docs.gradle.org/current/userguide/what_is_gradle.html
 * build.gradle에 import gradle
 * 플러그인 설치 and...
 
+
+
+## 3. Test Code
+
+TDD랑 단위테스트는 조금 다릅니다. TDD는
+
+> 1. 항상 실패하는 테스트를 먼저 작성(RED)
+> 2. 테스트가 통과하는 프로덕션 코드를 작성(GREEN)
+> 3. 해당 프로덕션 코드를 리팩토링(Refactor)
+
