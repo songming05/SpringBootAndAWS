@@ -48,5 +48,13 @@ Matchers (junit...depend...hamcrest)
 
 
 
+## 4. ORM(Object Relational Mapping) - JPA
+
+RDB를 사용하면 CRUD는 피할 수 없다.
+
+패러다임 불일치가 일어난다. 영원성, 일관성, 저장성이 강조된 DB 와 메시지 기반, 기능, 속성 강조의 객체지향 프로그래밍 언어가 추구하는 철학이 다르다.
+
+
+
 
 
