@@ -29,3 +29,24 @@ TDD랑 단위테스트는 조금 다릅니다. TDD는
 > 2. 테스트가 통과하는 프로덕션 코드를 작성(GREEN)
 > 3. 해당 프로덕션 코드를 리팩토링(Refactor)
 
+
+
+#### assertThat(assertj) VS. assertThat(junit) 
+
+> https://youtu.be/zLx_fI24UXM
+>
+> youtube - AssertJ가 JUnit의 assertThat 보다 편리한 이유 (백기선)
+>
+>
+> https://joel-costigliola.github.io/assertj/assertj-core.html
+>
+> official
+
+Matchers (junit...depend...hamcrest)
+
+자동완성기능이 좀 약한편.. Matchers.is(T)
+
+
+
+
+
