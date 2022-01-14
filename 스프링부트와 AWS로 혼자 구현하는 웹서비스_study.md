@@ -56,5 +56,37 @@ RDB를 사용하면 CRUD는 피할 수 없다.
 
 
 
+* @Entity
+
+  + 테이블과 링크될 클래스
+  + 기본적으로 클래스의 CamelCase 를 under_score_case로 매칭해준다.
+  + ***setter를 만들지 않는다!!***
+
+* @Id
+
+  + 해당 테이블의 PK 필드
+
+* @GenerateValue
+
+  + PK의 생성규칙
+
+* @Column
+
+  + 테이블의 컬럼을 나타냄
+  + 선언이 없더라도 필드는 모두 컬럼에 해당
+  + 문자열의 경우 VARCHAR(255)가 기본값
+
+  
+
+### Repository (interface Type)
+
+DBLayer 접근자, MyBatis에서 DAO라 불리는 객체
+
+extends JpaRepository<Entity 클래스, PK 타입> 사용 시 기본적인 CRUD 메소드 생성
+
+🚨 Entity 와 기본 EntityRepository 는 함께 위치하도록 할 것
+
+
+
 
 
