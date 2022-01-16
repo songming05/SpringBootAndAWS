@@ -4,10 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
@@ -15,7 +12,7 @@ import javax.persistence.Id;
 public class Posts {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 500, nullable = false)
@@ -27,8 +24,8 @@ public class Posts {
     private String author;
 
 
-    @Builder
     //빌더 패턴 클래스 생성, 생성자상단에 선언 시 생성자에 포함된 필드만 빌더에 포함
+    @Builder
     public Posts(String title, String content, String author) {
         this.title = title;
         this.content = content;

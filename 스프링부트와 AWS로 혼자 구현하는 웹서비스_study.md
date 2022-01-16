@@ -46,6 +46,12 @@ Matchers (junit...depend...hamcrest)
 
 자동완성기능이 좀 약한편.. Matchers.is(T)
 
+결론적으로 해당 패키지 asserThat 추천
+
+```java
+import static org.assertj.core.api.Assertions.assertThat;
+```
+
 
 
 ## 4. ORM(Object Relational Mapping) - JPA
@@ -61,6 +67,8 @@ RDB를 사용하면 CRUD는 피할 수 없다.
   + 테이블과 링크될 클래스
   + 기본적으로 클래스의 CamelCase 를 under_score_case로 매칭해준다.
   + ***setter를 만들지 않는다!!***
+  + Builder 패턴 추천(Lombok 사용 시, @Builder)
+    - 어느 필드에 어떤 값이 들어가는지 명확
 
 * @Id
 
@@ -77,6 +85,8 @@ RDB를 사용하면 CRUD는 피할 수 없다.
   + 문자열의 경우 VARCHAR(255)가 기본값
 
   
+  
+  
 
 ### Repository (interface Type)
 
@@ -85,6 +95,61 @@ DBLayer 접근자, MyBatis에서 DAO라 불리는 객체
 extends JpaRepository<Entity 클래스, PK 타입> 사용 시 기본적인 CRUD 메소드 생성
 
 🚨 Entity 와 기본 EntityRepository 는 함께 위치하도록 할 것
+
+
+
+* save(S entity) 
+  + CrudRepository 인터페이스에 선언
+  + 해당 Entity 테이블에 insert/update 실행
+  + id 값의 존재 여부로 쿼리결정
+
+
+
+## 5. application.properties / application.yml
+
+
+
+### 쿼리 로그 관련
+
+* 실행 로그 설정
+
+  +  ```properties
+     #spring.jpa.show-sql=true
+     spring.jpa.properties.hibernate.show_sql=true
+     ```
+
+  + 결과 예시
+
+    ```
+    Hibernate: drop table posts if exists
+    Hibernate: drop sequence if exists hibernate_sequence
+    Hibernate: create sequence hibernate_sequence start with 1 increment by 1
+    Hibernate: create table posts (id bigint not null, author varchar(255), content TEXT not null, title varchar(500) not null, primary key (id))
+    ...
+    Hibernate: call next value for hibernate_sequence
+    Hibernate: insert into posts (author, content, title, id) values (?, ?, ?, ?)
+    ...
+    Hibernate: select posts0_.id as id1_0_, posts0_.author as author2_0_, posts0_.content as content3_0_, posts0_.title as title4_0_ from posts posts0_
+    Hibernate: select posts0_.id as id1_0_, posts0_.author as author2_0_, posts0_.content as content3_0_, posts0_.title as title4_0_ from posts posts0_
+    Hibernate: delete from posts where id=?
+    ...
+    Hibernate: drop table posts if exists
+    Hibernate: drop sequence if exists hibernate_sequence
+    ```
+
+* MySQL 쿼리로 변경
+
+  + ```properties
+    spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+    ```
+
+    
+
+
+
+
+
+
 
 
 
