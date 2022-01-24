@@ -31,7 +31,7 @@ TDD랑 단위테스트는 조금 다릅니다. TDD는
 
 
 
-#### assertThat(assertj) VS. assertThat(junit) 
+### assertThat(assertj) Vs. assertThat(junit) 
 
 > https://youtu.be/zLx_fI24UXM
 >
@@ -51,6 +51,14 @@ Matchers (junit...depend...hamcrest)
 ```java
 import static org.assertj.core.api.Assertions.assertThat;
 ```
+
+
+
+### @WebMvcTest Vs. @SpringBootTest
+
+API 테스트를 할 때 @SpringBootTest(o.s.b.test.context..) 와 TestRestTemplate(o.s.b.test.web..)을 사용한다. @WebMvcTest의 경우에는 JPA 테스트까지 관여하지 않는다. 외부 연동과 관련된 부분(@Controller, @ControllerAdvice)에 집중한다.
+
+
 
 
 
@@ -105,6 +113,15 @@ extends JpaRepository<Entity 클래스, PK 타입> 사용 시 기본적인 CRUD 
 
 
 
+### Permanence Context(영속성 컨텍스트 feat.Entity)
+
+JPA 사용할 때 Entity 를 조회하고 update하는 경우 update 쿼리를 작성하지 않는다. 한 트랜잭션 안에서 select 한 내용을 JPA의 Entity Manager가 영속성 컨텍스트를 유지한다. 값의 변경이 일어나면 끝나는 시점에 해당 테이블에 변경분을 반영한다. 
+
+* 더티 체킹(dirty checking) (참고: https://jojoldu.tistory.com/415)
+  + DB에서 꺼낸 깨끗하고 무결한 데이터가 더러워졌는지(변했는지) 체크한다고 기억하자
+
+
+
 ## 5. application.properties / application.yml
 
 
@@ -143,7 +160,34 @@ extends JpaRepository<Entity 클래스, PK 타입> 사용 시 기본적인 CRUD 
     spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
     ```
 
-    
+
+
+
+## 6. API
+
+* DTO(Datat Transfer Object) for Datas
+
+* Controller for API Requst
+* Service for ensuring order about transaction and domain
+
+Service 는 트랜잭션, 도메인 간 순서 보장하는 역할이다. 비즈니스 로직은 Domain에서 처리한다. (아래 자료 참고) 기존 Service Layer에서 처리하는 건 **트랜잭션 스크립트**라고 한다.
+
+![spring_web_layers](C:\coding\Git\GitHub\SpringBootAndAWS\spring_web_layers.png)
+
+* Web Layer
+  + 외부와 요청/응답 관련 
+* Service Layer
+  + @Service
+  + @Transactional
+* Repository Layer
+  + 데이터 접근 영역 (like DAO)
+* DTOs
+  + 계층 간(Layers) 데이터 전달을 위한 객체들
+* Domain Model
+  + 공통의 이해(단순화)
+  + @Entity
+
+
 
 
 
