@@ -1,6 +1,6 @@
 package com.sb.beFriendWith.web;
 
-import com.sb.beFriendWith.domain.posts.PostRepository;
+import com.sb.beFriendWith.domain.posts.PostsRepository;
 import com.sb.beFriendWith.domain.posts.Posts;
 import com.sb.beFriendWith.web.dto.PostsSaveRequestDto;
 import org.junit.After;
@@ -29,11 +29,11 @@ public class PostApiControllerTest {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private PostRepository postRepository;
+    private PostsRepository postsRepository;
 
     @After
     public void tearDown() throws Exception {
-        postRepository.deleteAll();
+        postsRepository.deleteAll();
     }
 
     @Test
@@ -56,7 +56,7 @@ public class PostApiControllerTest {
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody()).isGreaterThan(0L);
 
-        List<Posts> all = postRepository.findAll();
+        List<Posts> all = postsRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(title);
         assertThat(all.get(0).getContent()).isEqualTo(content);
         assertThat(all.get(0).getAuthor()).isNotEmpty();

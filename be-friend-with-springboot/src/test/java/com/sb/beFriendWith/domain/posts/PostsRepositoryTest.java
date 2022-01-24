@@ -13,14 +13,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PostRepositoryTest {
+public class PostsRepositoryTest {
 
     @Autowired
-    PostRepository postRepository;
+    PostsRepository postsRepository;
 
     @After
     public void cleanUp() {
-        postRepository.deleteAll(); //다중 테스트 실행 시 삭제하지 않으면 H2 DB에 데이터가 남을 수 있다.
+        postsRepository.deleteAll(); //다중 테스트 실행 시 삭제하지 않으면 H2 DB에 데이터가 남을 수 있다.
     }
 
     @Test
@@ -33,10 +33,10 @@ public class PostRepositoryTest {
                 .content(content)
                 .author("songming")
                 .build();
-        postRepository.save(posts); //H2 DB가 사용될 것
+        postsRepository.save(posts); //H2 DB가 사용될 것
 
         //when
-        List<Posts> postsList = postRepository.findAll();
+        List<Posts> postsList = postsRepository.findAll();
 
         //then
         Posts onePosts = postsList.get(0);
