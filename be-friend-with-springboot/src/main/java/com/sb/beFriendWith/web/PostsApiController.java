@@ -4,10 +4,7 @@ import com.sb.beFriendWith.service.posts.PostsService;
 import com.sb.beFriendWith.web.dto.PostsSaveRequestDto;
 import com.sb.beFriendWith.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -19,12 +16,12 @@ public class PostsApiController {
         return postsService.save(requestDto);
     }
 
-    @PostMapping("/api/v1/posts/{id}")
+    @PutMapping("/api/v1/posts/{id}")
     public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
         return postsService.update(id, requestDto);
     }
 
-    @PostMapping("/api/v1/posts/{id}")
+    @DeleteMapping("/api/v1/posts/{id}")
     public Long delete(@PathVariable Long id) {
         postsService.delete(id);
         return id;
