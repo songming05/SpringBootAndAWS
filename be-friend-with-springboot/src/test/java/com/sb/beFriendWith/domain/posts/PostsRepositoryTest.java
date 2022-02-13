@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -49,6 +50,29 @@ public class PostsRepositoryTest {
     public void MySQL문법로그로_변경(){
         //org.hibernate.dialect.MySQL5Dialect
         //org.hibernate.dialect.MySQL5InnoDBDialect
+    }
+
+    @Test
+    public void JPA_Auditing_활성화_BaseTimeEntity_등록() {
+        //given
+        LocalDateTime now = LocalDateTime.of(2022,2,13,0,0,0 );
+        postsRepository.save(Posts.builder()
+                .title("title")
+                .content("content")
+                .author("author")
+                .build());
+
+        //when
+        List<Posts> postsList = postsRepository.findAll();
+
+        //then
+        Posts posts = postsList.get(0);
+
+        System.out.println(">>>>>>>> now="+now);
+        System.out.println(">>>>>>>> createDate=" + posts.getCreatedDate() + ", modifiedDate=" + posts.getModifiedDate());
+        assertThat(posts.getCreatedDate()).isAfter(now);
+        assertThat(posts.getModifiedDate()).isAfter(now);
+
     }
 
 }

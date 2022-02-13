@@ -1,10 +1,13 @@
 package com.sb.beFriendWith.web;
 
 import com.sb.beFriendWith.service.posts.PostsService;
+import com.sb.beFriendWith.web.dto.PostsResponseDto;
 import com.sb.beFriendWith.web.dto.PostsSaveRequestDto;
 import com.sb.beFriendWith.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,5 +28,10 @@ public class PostsApiController {
     public Long delete(@PathVariable Long id) {
         postsService.delete(id);
         return id;
+    }
+
+    @GetMapping("/api/v1/posts/{id}")
+    public PostsResponseDto findById(@PathVariable Long id) {
+        return postsService.findById(id);
     }
 }

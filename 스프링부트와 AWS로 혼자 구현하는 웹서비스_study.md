@@ -64,6 +64,12 @@ API 테스트를 할 때 @SpringBootTest(o.s.b.test.context..) 와 TestRestTempl
 
 ## 4. ORM(Object Relational Mapping) - JPA
 
+### 공부할 참고자료
+
+* <자바 ORM 표준 JPA 프로그래밍> (김영한, 에이콘)
+
+
+
 RDB를 사용하면 CRUD는 피할 수 없다.
 
 패러다임 불일치가 일어난다. 영원성, 일관성, 저장성이 강조된 DB 와 메시지 기반, 기능, 속성 강조의 객체지향 프로그래밍 언어가 추구하는 철학이 다르다.
@@ -122,11 +128,19 @@ JPA 사용할 때 Entity 를 조회하고 update하는 경우 update 쿼리를 �
 
 
 
+## 4.1. JPA Auditing
+
+
+
+
+
+
+
 ## 5. application.properties / application.yml
 
 
 
-### 쿼리 로그 관련
+### Query Logging 관련
 
 * 실행 로그 설정
 
@@ -162,6 +176,19 @@ JPA 사용할 때 Entity 를 조회하고 update하는 경우 update 쿼리를 �
 
 
 
+### Web Console
+
+```properties
+#MemoryAccessBy Web Console
+spring.h2.console.enabled=true
+```
+
+
+
+
+
+
+
 
 ## 6. API
 
@@ -186,6 +213,28 @@ Service 는 트랜잭션, 도메인 간 순서 보장하는 역할이다. 비즈
 * Domain Model
   + 공통의 이해(단순화)
   + @Entity
+
+
+
+
+
+## 7. JDK1.8 Features
+
+### 1) LocalDate, LocalDateTime
+
+* Date / Calander 
+  + 불변객체가 아니다. → 멀티 스레드 환경에서 불안하다.
+  + Calander의 월(Month) 값이 상식적이지 않다. ex) `Calander.OCTOBER` 값은 '9'이다.
+  + http://d2.naver.com/helloworld/645609
+* Hibernate 5.2.10 부터 데이터베이스에 정상 매핑 (SpringBoot 2.X 부터)
+
+
+
+
+
+
+
+
 
 
 
