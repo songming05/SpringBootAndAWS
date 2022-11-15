@@ -1,14 +1,10 @@
 # 스프링부트와 AWS로 혼자 구현하는 웹서비스_study
 
-
-
 ## 1. IntelliJ
 
 인텔리제이에서는 하나의 프로젝트만 열린다. 이클립스의 Workspace 개념과는 사뭇 다르다. 특히나 multi-module 환경에서 효과가 좋다.
 
 https://jojoldu.tistory.com/334
-
-
 
 ## 2. Gradle
 
@@ -19,8 +15,6 @@ https://docs.gradle.org/current/userguide/what_is_gradle.html
 * build.gradle에 import gradle
 * 플러그인 설치 and...
 
-
-
 ## 3. Test Code
 
 TDD랑 단위테스트는 조금 다릅니다. TDD는
@@ -29,17 +23,14 @@ TDD랑 단위테스트는 조금 다릅니다. TDD는
 > 2. 테스트가 통과하는 프로덕션 코드를 작성(GREEN)
 > 3. 해당 프로덕션 코드를 리팩토링(Refactor)
 
-
-
-### assertThat(assertj) Vs. assertThat(junit) 
+### assertThat(assertj) Vs. assertThat(junit)
 
 > https://youtu.be/zLx_fI24UXM
->
+> 
 > youtube - AssertJ가 JUnit의 assertThat 보다 편리한 이유 (백기선)
->
->
+> 
 > https://joel-costigliola.github.io/assertj/assertj-core.html
->
+> 
 > official
 
 Matchers (junit...depend...hamcrest)
@@ -52,15 +43,9 @@ Matchers (junit...depend...hamcrest)
 import static org.assertj.core.api.Assertions.assertThat;
 ```
 
-
-
 ### @WebMvcTest Vs. @SpringBootTest
 
 API 테스트를 할 때 @SpringBootTest(o.s.b.test.context..) 와 TestRestTemplate(o.s.b.test.web..)을 사용한다. @WebMvcTest의 경우에는 JPA 테스트까지 관여하지 않는다. 외부 연동과 관련된 부분(@Controller, @ControllerAdvice)에 집중한다.
-
-
-
-
 
 ## 4. ORM(Object Relational Mapping) - JPA
 
@@ -68,16 +53,12 @@ API 테스트를 할 때 @SpringBootTest(o.s.b.test.context..) 와 TestRestTempl
 
 * <자바 ORM 표준 JPA 프로그래밍> (김영한, 에이콘)
 
-
-
 RDB를 사용하면 CRUD는 피할 수 없다.
 
 패러다임 불일치가 일어난다. 영원성, 일관성, 저장성이 강조된 DB 와 메시지 기반, 기능, 속성 강조의 객체지향 프로그래밍 언어가 추구하는 철학이 다르다.
 
-
-
 * @Entity
-
+  
   + 테이블과 링크될 클래스
   + 기본적으로 클래스의 CamelCase 를 under_score_case로 매칭해준다.
   + ***setter를 만들지 않는다!!***
@@ -85,22 +66,18 @@ RDB를 사용하면 CRUD는 피할 수 없다.
     - 어느 필드에 어떤 값이 들어가는지 명확
 
 * @Id
-
+  
   + 해당 테이블의 PK 필드
 
 * @GenerateValue
-
+  
   + PK의 생성규칙
 
 * @Column
-
+  
   + 테이블의 컬럼을 나타냄
   + 선언이 없더라도 필드는 모두 컬럼에 해당
   + 문자열의 경우 VARCHAR(255)가 기본값
-
-  
-  
-  
 
 ### Repository (interface Type)
 
@@ -110,14 +87,10 @@ extends JpaRepository<Entity 클래스, PK 타입> 사용 시 기본적인 CRUD 
 
 🚨 Entity 와 기본 EntityRepository 는 함께 위치하도록 할 것
 
-
-
 * save(S entity) 
   + CrudRepository 인터페이스에 선언
   + 해당 Entity 테이블에 insert/update 실행
   + id 값의 존재 여부로 쿼리결정
-
-
 
 ### Permanence Context(영속성 컨텍스트 feat.Entity)
 
@@ -126,31 +99,21 @@ JPA 사용할 때 Entity 를 조회하고 update하는 경우 update 쿼리를 �
 * 더티 체킹(dirty checking) (참고: https://jojoldu.tistory.com/415)
   + DB에서 꺼낸 깨끗하고 무결한 데이터가 더러워졌는지(변했는지) 체크한다고 기억하자
 
-
-
 ## 4.1. JPA Auditing
 
-
-
-
-
-
-
 ## 5. application.properties / application.yml
-
-
 
 ### Query Logging 관련
 
 * 실행 로그 설정
-
-  +  ```properties
-     #spring.jpa.show-sql=true
-     spring.jpa.properties.hibernate.show_sql=true
-     ```
-
+  
+  + ```properties
+    #spring.jpa.show-sql=true
+    spring.jpa.properties.hibernate.show_sql=true
+    ```
+  
   + 결과 예시
-
+    
     ```
     Hibernate: drop table posts if exists
     Hibernate: drop sequence if exists hibernate_sequence
@@ -169,12 +132,10 @@ JPA 사용할 때 Entity 를 조회하고 update하는 경우 update 쿼리를 �
     ```
 
 * MySQL 쿼리로 변경
-
+  
   + ```properties
     spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
     ```
-
-
 
 ### Web Console
 
@@ -183,18 +144,12 @@ JPA 사용할 때 Entity 를 조회하고 update하는 경우 update 쿼리를 �
 spring.h2.console.enabled=true
 ```
 
-
-
-
-
-
-
-
 ## 6. API
 
 * DTO(Datat Transfer Object) for Datas
 
 * Controller for API Requst
+
 * Service for ensuring order about transaction and domain
 
 Service 는 트랜잭션, 도메인 간 순서 보장하는 역할이다. 비즈니스 로직은 Domain에서 처리한다. (아래 자료 참고) 기존 Service Layer에서 처리하는 건 **트랜잭션 스크립트**라고 한다.
@@ -214,10 +169,6 @@ Service 는 트랜잭션, 도메인 간 순서 보장하는 역할이다. 비즈
   + 공통의 이해(단순화)
   + @Entity
 
-
-
-
-
 ## 7. JDK1.8 Features
 
 ### 1) LocalDate, LocalDateTime
@@ -227,24 +178,3 @@ Service 는 트랜잭션, 도메인 간 순서 보장하는 역할이다. 비즈
   + Calander의 월(Month) 값이 상식적이지 않다. ex) `Calander.OCTOBER` 값은 '9'이다.
   + http://d2.naver.com/helloworld/645609
 * Hibernate 5.2.10 부터 데이터베이스에 정상 매핑 (SpringBoot 2.X 부터)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
