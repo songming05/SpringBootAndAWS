@@ -178,3 +178,17 @@ Service 는 트랜잭션, 도메인 간 순서 보장하는 역할이다. 비즈
   + Calander의 월(Month) 값이 상식적이지 않다. ex) `Calander.OCTOBER` 값은 '9'이다.
   + http://d2.naver.com/helloworld/645609
 * Hibernate 5.2.10 부터 데이터베이스에 정상 매핑 (SpringBoot 2.X 부터)
+
+
+
+## 8. JPA + 조회용 프레임워크
+
+* Querydsl, jooq, myBatis
+
+### Querydsl
+
+* 타입 안전성 보장
+  
+  * 문자열로 쿼리 생성이 아니라 메소드 기반으로 생성 (Jooq도 가능)
+
+* 국내 많은 회사에서 사용 / 많은 레퍼런스

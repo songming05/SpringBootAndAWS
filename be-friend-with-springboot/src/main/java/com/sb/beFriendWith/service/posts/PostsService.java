@@ -2,12 +2,16 @@ package com.sb.beFriendWith.service.posts;
 
 import com.sb.beFriendWith.domain.posts.PostsRepository;
 import com.sb.beFriendWith.domain.posts.Posts;
+import com.sb.beFriendWith.web.dto.PostsListResponseDto;
 import com.sb.beFriendWith.web.dto.PostsResponseDto;
 import com.sb.beFriendWith.web.dto.PostsSaveRequestDto;
 import com.sb.beFriendWith.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -46,5 +50,14 @@ public class PostsService {
         );
 
         return new PostsResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc() {
+        List<Posts> allDesc = postsRepository.findAllDesc();
+
+        return allDesc.stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
     }
 }

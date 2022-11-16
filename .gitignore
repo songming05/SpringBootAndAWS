@@ -28,3 +28,7 @@ build
 
 #gradle
 .gradle
+
+#properties
+application-oauth.properties
+be-friend-with-springboot/src/main/resources/application-oauth.properties
