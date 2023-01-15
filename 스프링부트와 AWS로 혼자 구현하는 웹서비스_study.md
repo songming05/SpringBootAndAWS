@@ -179,8 +179,6 @@ Service 는 트랜잭션, 도메인 간 순서 보장하는 역할이다. 비즈
   + http://d2.naver.com/helloworld/645609
 * Hibernate 5.2.10 부터 데이터베이스에 정상 매핑 (SpringBoot 2.X 부터)
 
-
-
 ## 8. JPA + 조회용 프레임워크
 
 * Querydsl, jooq, myBatis
